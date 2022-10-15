@@ -28,19 +28,18 @@ int main(void)
     //initizal the strength and obedience
     Strength strength =INIT_STRENGTH;
     Obedience obedience =INIT_OBEDIENCE;
+     int n=0;//成功的指令數
     //get the input
    while(1){
-    int cmd =getchar();
-    int n=0;//指令數
-    if(strength>=LEARN_STRENGTH&&obedience>=LEARN_OBEDIENCE)
+    int cmd =getchar();//讀取一個字元
+   
+    if(strength<=LEARN_STRENGTH&&obedience>=LEARN_OBEDIENCE)//當服從度不小於 LEARN_OBEDIENCE，並且體力值不大於 LEARN_STRENGTH 時，就可以成功訓練一個指令。
     {
-        n+=1;
-        obedience=INIT_OBEDIENCE;
-        
-
+        n+=1;//成功一次了
+        obedience=INIT_OBEDIENCE;//這時候柯基的體力值不變，但服從度會變為 INIT_OBEDIENCE。
+        //printf("hahaah\n");
     }
-    else
-    {
+    
     //eating 當小智餵食柯基時，會增加 STRENGTH_EAT 量的體力值，但會降低 OBEDIENCE_EAT 的服從度
      if(cmd=='e')
         {
@@ -52,25 +51,25 @@ int main(void)
         strength-=STRENGTH_TRAIN;
         obedience+=OBEDIENCE_TRAIN;
         }
-        else if (cmd=='\n')//the input end and it's time to see the ans
+        else if (cmd=='\n')//the input end and it's time to see the ans（結算）
         {
-            if(n>=5)
+            if(n==5)
             {
                 printf("Yes\n");
+                return 0;
+
             }
             else
             {
                 printf("No\n");
-                //printf("%d\n",n);
+                return 0;
             }
-        break;
         }
-    }
    }
     
 
    
    
 
-    return 0;
+    //return 0;
 }
